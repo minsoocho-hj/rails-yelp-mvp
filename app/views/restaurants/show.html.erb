@@ -1,0 +1,27 @@
+<div>
+<p>
+  <strong>Name:</strong>
+  <%= @restaurant.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @restaurant.address %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @restaurant.reviews %>
+</p>
+
+<% @restaurant.reviews.each do |review| %>
+  <p><%= review.content %></p>
+  <hr>
+<% end %>
+
+<%# rating이 안불러짐... 찾을 수 없다고. %>
+
+</div>
+<%= link_to "Edit", edit_restaurant_path(@restaurant)  %>
+<%= link_to "Back", restaurant_path %>
+<%= link_to "Write review", new_restaurant_review_path(@restaurant)  %>
