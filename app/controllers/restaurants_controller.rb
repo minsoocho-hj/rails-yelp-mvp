@@ -5,19 +5,25 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.all
   end
 
-  def show; end
+  def show
+  end
 
   def new
     @restaurant = Restaurant.new
   end
 
   def create
-    Restaurant.create(restaurant_params)
+    @restaurant = Restaurant.new(restaurant_params)
+    if @restaurant.save
+      redirect_to restaurants_path
+    else
+      render :new
+    end
   end
 
   def update
     @restaurant.update(restaurant_params)
-    # redirect_to tasks_path
+    redirect_to restaurant_path(@restaurant)
   end
 
   def edit
@@ -25,13 +31,13 @@ class RestaurantsController < ApplicationController
 
   def destroy
     @restaurant.destroy
-    # redirect_to tasks_path
+    redirect_to restaurants_path
   end
 
   private
 
   def restaurant_params
-    params.required(:restaurant).permit(:name, :address)
+    params.required(:restaurant).permit(:name, :address, :phone_number, :category)
   end
 
   def find_param

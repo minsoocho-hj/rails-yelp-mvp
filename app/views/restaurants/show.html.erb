@@ -1,4 +1,7 @@
+<h1>Restaurant information</h1>
+
 <div>
+<hr>
 <p>
   <strong>Name:</strong>
   <%= @restaurant.name %>
@@ -10,18 +13,27 @@
 </p>
 
 <p>
-  <strong>Rating:</strong>
-  <%= @restaurant.reviews %>
+  <strong>Phone number:</strong>
+  <%= @restaurant.phone_number %>
 </p>
 
-<% @restaurant.reviews.each do |review| %>
-  <p><%= review.content %></p>
-  <hr>
-<% end %>
+<p>
+  <strong>Category:</strong>
+  <%= @restaurant.category %>
+</p>
 
-<%# rating이 안불러짐... 찾을 수 없다고. %>
+<h3>Reviews</h3>
+<hr>
+<% @restaurant.reviews.each do |review| %>
+  <span>Rating: <%= '⭐️'* review.rating %>  <br></span>
+  <span>Content: <%= review.content %> <br></span>
+  <hr>
+<% end  %>
+
 
 </div>
-<%= link_to "Edit", edit_restaurant_path(@restaurant)  %>
-<%= link_to "Back", restaurant_path %>
-<%= link_to "Write review", new_restaurant_review_path(@restaurant)  %>
+
+<button class = "btn btn-dark"><%= link_to "Back", restaurants_path %></button>
+<button class = "btn btn-dark"><%= link_to "Edit", edit_restaurant_path(@restaurant) %></button>
+<button class = "btn btn-dark"><%= link_to "Delete", restaurant_path(@restaurant), method: :delete, data: { confirm: "Are you sure?" } %></button>
+<button class = "btn btn-dark"><%= link_to "Write review", new_restaurant_review_path(@restaurant) %></button>
